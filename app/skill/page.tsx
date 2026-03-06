@@ -1,20 +1,52 @@
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Code2, Cpu, Home } from "lucide-react";
+import Image from "next/image";
 import GradientText from "@/components/GradientText";
 
-export default function Skills() {
-  const skills = [
-    { name: "JavaScript", icon: Code2, color: "text-yellow-400" },
-    { name: "TypeScript", icon: Cpu, color: "text-blue-400" },
-    { name: "React", icon: Code2, color: "text-cyan-400" },
-    { name: "Next.js", icon: Home, color: "text-white" },
-    { name: "Tailwind CSS", icon: Briefcase, color: "text-teal-400" },
-    { name: "Redux", icon: Code2, color: "text-purple-400" },
-    { name: "HTML5", icon: Code2, color: "text-orange-500" },
-    { name: "CSS3", icon: Code2, color: "text-blue-500" },
-  ];
+const skills = [
+  {
+    name: "JavaScript",
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    glow: "from-yellow-400/40",
+  },
+  {
+    name: "TypeScript",
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    glow: "from-blue-500/40",
+  },
+  {
+    name: "React",
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    glow: "from-cyan-400/40",
+  },
+  {
+    name: "Next.js",
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    glow: "from-white/20",
+  },
+  {
+    name: "Tailwind CSS",
+img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",    glow: "from-sky-400/40",
+  },
+  {
+    name: "Redux",
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
+    glow: "from-purple-500/40",
+  },
+  {
+    name: "HTML5",
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    glow: "from-orange-500/40",
+  },
+  {
+    name: "CSS3",
+    img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    glow: "from-blue-500/40",
+  },
+];
 
+export default function Skills() {
   return (
     <section id="skills" className="mb-40">
       {/* Header */}
@@ -32,35 +64,39 @@ export default function Skills() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-        {skills.map((skill, index) => {
-          const Icon = skill.icon;
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+        {skills.map((skill, i) => (
+          <motion.div
+            key={skill.name}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8, scale: 1.05 }}
+            className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col items-center gap-4 overflow-hidden"
+          >
+            {/* Glow */}
+            <div
+              className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br ${skill.glow} to-transparent blur-2xl`}
+            />
 
-          return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -6, scale: 1.03 }}
-              className="group relative rounded-2xl border border-white/10 bg-white/5 p-6 flex flex-col items-center justify-center gap-4 transition-all hover:border-blue-500/40"
-            >
-              {/* Glow */}
-              <div className="absolute inset-0 rounded-2xl bg-blue-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            {/* Logo */}
+            <div className="relative z-10 w-16 h-16 rounded-xl bg-black/40 flex items-center justify-center">
+              <Image
+                src={skill.img}
+                alt={skill.name}
+                width={42}
+                height={42}
+                className="object-contain"
+              />
+            </div>
 
-              {/* Icon */}
-              <div className="relative z-10 w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center">
-                <Icon className={`w-7 h-7 ${skill.color}`} />
-              </div>
-
-              {/* Name */}
-              <span className="relative z-10 font-semibold text-gray-300 group-hover:text-white transition-colors">
-                {skill.name}
-              </span>
-            </motion.div>
-          );
-        })}
+            {/* Name */}
+            <span className="relative z-10 font-semibold text-gray-300 group-hover:text-white transition-colors">
+              {skill.name}
+            </span>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

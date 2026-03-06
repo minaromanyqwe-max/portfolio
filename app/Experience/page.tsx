@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
 import GradientText from "@/components/GradientText";
@@ -32,7 +33,8 @@ export default function Experience() {
             animationSpeed={8}
             showBorder={false}
           >
-            Experience
+            My studies
+
           </GradientText>
         </h2>
         <div className="h-[2px] w-24 bg-gradient-to-r from-blue-500 to-transparent" />

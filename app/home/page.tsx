@@ -44,23 +44,21 @@ export default function HOME() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
       >
-        <ProfileCard
-          name=""
-          title=""
-          handle="javicodes"
-          status="Online"
-          contactText="Contact Me"
-          avatarUrl="/Adobe Express - file.png"
-          showUserInfo={false}
-          enableTilt
-          enableMobileTilt={false}
-          onContactClick={() => console.log('Contact clicked')}
-          behindGlowEnabled
-          behindGlowColor="rgba(125, 190, 255, 0.67)"
-          iconUrl="/Adobe Express - file.png"
-          innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
-        />
-      </motion.div>
+<ProfileCard
+  name=""
+  title=""
+  handle="javicodes"
+  status="Online"
+  contactText="Contact Me"
+  avatarUrl="/imge.png"
+  showUserInfo={false}
+  enableTilt
+  onContactClick={() => console.log("Contact clicked")}
+  behindGlowEnabled
+  behindGlowColor="rgba(125, 190, 255, 0.25)"
+  innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
+/>   
+   </motion.div>
 
       {/* Text Content */}
       <motion.div
@@ -95,14 +93,14 @@ export default function HOME() {
         {/* CTA */}
         <div className="flex flex-wrap gap-5">
           <a
-            href="/cv.pdf"
+            href="/Mina Romany Abdel-shaheed.CV.pdf"
             className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all hover:scale-105"
           >
             Download CV
           </a>
 
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/mina-romani-a1a242367/"
             target="_blank"
             className="px-8 py-3 glass rounded-full font-semibold hover:bg-white/10 transition-all flex items-center gap-2"
           >
