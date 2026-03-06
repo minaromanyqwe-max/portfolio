@@ -1,14 +1,10 @@
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
-
-/* ================= CONFIG ================= */
+import React, { useEffect, useRef, useCallback } from "react";
 
 const DEFAULT_INNER_GRADIENT =
   "linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)";
 
 const clamp = (v: number, min = 0, max = 100) =>
   Math.min(Math.max(v, min), max);
-
-/* ================= TYPES ================= */
 
 interface ProfileCardProps {
   avatarUrl?: string;
@@ -25,8 +21,6 @@ interface ProfileCardProps {
   showUserInfo?: boolean;
   onContactClick?: () => void;
 }
-
-/* ================= COMPONENT ================= */
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
   avatarUrl = "/avatar.png",
@@ -45,35 +39,30 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 }) => {
   const shellRef = useRef<HTMLDivElement>(null);
 
-  /* ================= TILT ================= */
-
   const handlePointerMove = useCallback(
     (e: PointerEvent) => {
       if (!enableTilt || !shellRef.current) return;
+
       const rect = shellRef.current.getBoundingClientRect();
+
       const x = clamp(((e.clientX - rect.left) / rect.width) * 100);
       const y = clamp(((e.clientY - rect.top) / rect.height) * 100);
 
       shellRef.current.style.setProperty("--px", `${x}%`);
       shellRef.current.style.setProperty("--py", `${y}%`);
-      shellRef.current.style.setProperty(
-        "--rx",
-        `${(50 - y) / 8}deg`
-      );
-      shellRef.current.style.setProperty(
-        "--ry",
-        `${(x - 50) / 8}deg`
-      );
+      shellRef.current.style.setProperty("--rx", `${(50 - y) / 8}deg`);
+      shellRef.current.style.setProperty("--ry", `${(x - 50) / 8}deg`);
     },
     [enableTilt]
   );
 
   const resetTilt = () => {
     if (!shellRef.current) return;
-    shellRef.current.style.setProperty("--rx", `0deg`);
-    shellRef.current.style.setProperty("--ry", `0deg`);
-    shellRef.current.style.setProperty("--px", `50%`);
-    shellRef.current.style.setProperty("--py", `50%`);
+
+    shellRef.current.style.setProperty("--rx", "0deg");
+    shellRef.current.style.setProperty("--ry", "0deg");
+    shellRef.current.style.setProperty("--px", "50%");
+    shellRef.current.style.setProperty("--py", "50%");
   };
 
   useEffect(() => {
@@ -89,8 +78,6 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     };
   }, [enableTilt, handlePointerMove]);
 
-  /* ================= RENDER ================= */
-
   return (
     <div
       ref={shellRef}
@@ -103,7 +90,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         "--ry": "0deg"
       } as React.CSSProperties}
     >
-      {/* ===== BEHIND GLOW ===== */}
+      {/* Glow خلف الكارد */}
       {behindGlowEnabled && (
         <div
           className="absolute inset-0 -z-10"
@@ -114,21 +101,18 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         />
       )}
 
-      {/* ===== CARD ===== */}
+      {/* الكارد */}
       <section
-        className="relative overflow-hidden"
+        className="relative overflow-hidden w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]"
         style={{
-          height: "520px",
           aspectRatio: "0.72",
           borderRadius: "30px",
           background: "rgba(0,0,0,0.9)",
-          transform:
-            "rotateX(var(--rx)) rotateY(var(--ry)) translateZ(0)",
-          transition: "transform 0.6s ease",
-          backfaceVisibility: "hidden"
+          transform: "rotateX(var(--rx)) rotateY(var(--ry))",
+          transition: "transform 0.6s ease"
         }}
       >
-        {/* ===== INNER GRADIENT ===== */}
+        {/* الخلفية */}
         <div
           className="absolute inset-0"
           style={{
@@ -137,7 +121,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           }}
         />
 
-        {/* ===== SHINE (BEHIND IMAGE) ===== */}
+        {/* Shine effect */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -149,7 +133,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           }}
         />
 
-        {/* ===== AVATAR (CLEAN LAYER) ===== */}
+        {/* الصورة */}
         <div
           className="absolute inset-0"
           style={{
@@ -161,20 +145,16 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           <img
             src={avatarUrl}
             alt={name}
-            className="absolute left-1/2 bottom-0 w-full"
+            className="absolute left-1/2 bottom-0 w-[110%] sm:w-[105%] md:w-full lg:w-[95%]"
             style={{
               transform: "translateX(-50%)",
-              objectFit: "cover",
-              mixBlendMode: "normal",
-              filter: "none",
-              opacity: 1,
-              backfaceVisibility: "hidden"
+              objectFit: "cover"
             }}
             draggable={false}
           />
         </div>
 
-        {/* ===== USER INFO ===== */}
+        {/* المعلومات */}
         {showUserInfo && (
           <div
             className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between backdrop-blur-xl border border-white/10"
@@ -192,6 +172,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
                 {status}
               </div>
             </div>
+
             <button
               onClick={onContactClick}
               className="text-xs font-semibold px-4 py-2 rounded-lg border border-white/20 text-white hover:border-white/50 transition"
@@ -201,17 +182,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           </div>
         )}
 
-        {/* ===== NAME ===== */}
+        {/* الاسم */}
         <div
           className="absolute top-10 w-full text-center z-10"
           style={{ pointerEvents: "none" }}
         >
-          <h3 className="text-3xl font-bold text-white">
-            {name}
-          </h3>
-          <p className="text-white/70 text-sm mt-1">
-            {title}
-          </p>
+          <h3 className="text-3xl font-bold text-white">{name}</h3>
+          <p className="text-white/70 text-sm mt-1">{title}</p>
         </div>
       </section>
     </div>
