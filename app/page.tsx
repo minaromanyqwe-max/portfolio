@@ -199,7 +199,7 @@ export default function Portfolio() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">GitHub</p>
-                        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-400 transition-colors">github.com/yourusername</a>
+                        <a href="https://github.com/minaromanyqwe-max" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-400 transition-colors">https://github.com/minaromanyqwe-max</a>
                       </div>
                     </div>
                   </div>
