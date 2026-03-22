@@ -14,6 +14,15 @@ const projects = [
     color: "from-orange-500/20 to-rose-500/20",
     imageUrl: "./ee.png",
   },
+    {
+    name: "Games",
+    url: "https://games-kappa-eight.vercel.app",
+    description: "project very good",
+    tech: ["Next.js", "Firebase", "Tailwind"],
+    color: "from-orange-500/20 to-rose-500/20",
+    imageUrl: "./Screenshot 2026-03-23 011221.png",
+  },
+
   {
     name: "CRUD System JS",
     url: "https://minaromanyqwe-max.github.io/js/",
