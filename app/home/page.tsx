@@ -36,24 +36,28 @@ export default function HOME() {
   return (
     <section
       id="home"
-      className="min-h-[85vh] grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-32"
+      className="min-h-[85vh] flex flex-col-reverse md:grid md:grid-cols-2 gap-12 md:gap-16 items-center mb-32"
     >
       {/* Profile Card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
+        className="flex justify-center md:justify-start"
       >
 <ProfileCard
-  name=""
-  title=""
-  handle="javicodes"
-  status="Online"
-  contactText="Contact Me"
+  name="Mina Romany"
+  title="Front-End Developer"
+  handle="minaromany"
+  status="Available for Work"
+  contactText="Hire Me"
   avatarUrl="/imge.png"
-  showUserInfo={false}
+  showUserInfo={true}
   enableTilt
-  onContactClick={() => console.log("Contact clicked")}
+  onContactClick={() => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+  }}
   behindGlowEnabled
   behindGlowColor="rgba(125, 190, 255, 0.25)"
   innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
@@ -67,7 +71,7 @@ export default function HOME() {
         transition={{ duration: 0.6 }}
         className="space-y-8"
       >
-        <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight">
           <GradientText
             colors={['#5227FF', '#FF9FFC', '#B19EEF', '#e11414']}
             animationSpeed={8}
@@ -79,7 +83,7 @@ export default function HOME() {
 
         {/* Typing */}
         <div className="flex items-center h-12">
-          <span className="text-2xl md:text-3xl text-gray-400 font-medium">
+          <span className="text-xl sm:text-2xl md:text-3xl text-gray-400 font-medium">
             a {text}
           </span>
           <span className="ml-2 w-[2px] h-8 bg-blue-500 animate-pulse" />

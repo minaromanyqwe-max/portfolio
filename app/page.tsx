@@ -11,14 +11,17 @@ import {
 } from "lucide-react";
 import Project from "./project/page";
 import Skills from "./skill/page";
-import Footer from "./compont/footer";
+import Footer from "@/components/Footer";
 import About from './about/page';
-import Navbar from './compont/navbar';
+import Navbar from '@/components/Navbar';
 import HOME from "./home/page";
 import Particles from "@/components/Particles";
 import SplashCursor from "@/components/SplashCursor";
 import GradientText from "@/components/GradientText";
+import { useEffect } from "react";
 import Experience from "./Experience/page";
+import Loading from "@/components/Loading";
+import { AnimatePresence } from "framer-motion";
 
 
 function ContactForm() {
@@ -124,93 +127,110 @@ function ContactForm() {
 }
 
 export default function Portfolio() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulated loading delay (you can adjust or use real data fetching)
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
-      <Toaster position="top-center" />
-      <Navbar />
-      
-      <div className="relative bg-[#0f0e13] text-white font-['Poppins']">
-        {/* Background Particles */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <Particles
-            particleCount={200}
-            particleSpread={10}
-            speed={0.1}
-            particleColors={["#ffffff"]}
-            moveParticlesOnHover
-            particleHoverFactor={1}
-            alphaParticles={false}
-            particleBaseSize={100}
-            sizeRandomness={1}
-            cameraDistance={20}
-            disableRotation={false}
-          />
-        </div>
-        <div className="absolute inset-0 pointer-events-none">
-          <SplashCursor
-            SIM_RESOLUTION={128}
-            DYE_RESOLUTION={1440}
-            DENSITY_DISSIPATION={3.5}
-            VELOCITY_DISSIPATION={2}
-            PRESSURE={0.1}
-            CURL={3}
-            SPLAT_RADIUS={0.2}
-            SPLAT_FORCE={6000}
-            COLOR_UPDATE_SPEED={10}
-          />
-        </div>
-        {/* Content */}
-        <div className="relative z-10 flex justify-center items-center">
-          <main className="flex-1 px-6 md:px-20 py-12 max-w-7xl mx-auto">
-            {/* Hero Section */}
-            <HOME />
-            {/* About Section */}
-            <About />
-            {/* Skills Section */}
-            <Skills />
-            {/* Projects Section */}
-            <Project />
-            {/* Experience / Education */}
-<Experience/>
-            {/* Contact Section */}
-            <section id="contact" className="mb-40">
-              <div className="flex items-center gap-4 mb-12">
-                <h2 className="text-3xl font-bold">Get In Touch</h2>
-                <div className="h-0.5 w-24 bg-gradient-to-r from-blue-500 to-transparent"></div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                  <p className="text-xl text-gray-400 mb-8">
-                    Have a project in mind? Let&apos;s collaborate and create something amazing together!
-                  </p>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
-                        <Mail className="w-6 h-6 text-blue-400" />
+      <AnimatePresence>
+        {loading && <Loading key="loader" />}
+      </AnimatePresence>
+
+      <div className={clsx("transition-opacity duration-1000", loading ? "opacity-0" : "opacity-100")}>
+        <Toaster position="top-center" />
+        <Navbar />
+        
+        <div className="relative bg-[#0f0e13] text-white font-['Poppins']">
+          {/* Background Particles */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <Particles
+              particleCount={200}
+              particleSpread={10}
+              speed={0.1}
+              particleColors={["#ffffff"]}
+              moveParticlesOnHover
+              particleHoverFactor={1}
+              alphaParticles={false}
+              particleBaseSize={100}
+              sizeRandomness={1}
+              cameraDistance={20}
+              disableRotation={false}
+            />
+          </div>
+          <div className="absolute inset-0 pointer-events-none">
+            <SplashCursor
+              SIM_RESOLUTION={128}
+              DYE_RESOLUTION={1440}
+              DENSITY_DISSIPATION={3.5}
+              VELOCITY_DISSIPATION={2}
+              PRESSURE={0.1}
+              CURL={3}
+              SPLAT_RADIUS={0.2}
+              SPLAT_FORCE={6000}
+              COLOR_UPDATE_SPEED={10}
+            />
+          </div>
+          {/* Content */}
+          <div className="relative z-10 flex justify-center items-center">
+            <main className="flex-1 px-4 sm:px-6 md:px-12 lg:px-20 py-12 max-w-7xl mx-auto overflow-hidden">
+              {/* Hero Section */}
+              <HOME />
+              {/* About Section */}
+              <About />
+              {/* Skills Section */}
+              <Skills />
+              {/* Projects Section */}
+              <Project />
+              {/* Experience / Education */}
+              <Experience/>
+              {/* Contact Section */}
+              <section id="contact" className="mb-40">
+                <div className="flex items-center gap-4 mb-12">
+                  <h2 className="text-3xl font-bold">Get In Touch</h2>
+                  <div className="h-0.5 w-24 bg-gradient-to-r from-blue-500 to-transparent"></div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-12 items-center">
+                  <div className="space-y-6">
+                    <p className="text-xl text-gray-400 mb-8">
+                      Have a project in mind? Let&apos;s collaborate and create something amazing together!
+                    </p>
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
+                          <Mail className="w-6 h-6 text-blue-400" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-500">Email</p>
+                          <a href="mailto:minaromanyqwe@gmail.com" className="text-white hover:text-blue-400 transition-colors">minaromanyqwe@gmail.com</a>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-sm text-gray-500">Email</p>
-                        <a href="mailto:minaromanyqwe@gmail.com" className="text-white hover:text-blue-400 transition-colors">minaromanyqwe@gmail.com</a>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center">
-                        <Github className="w-6 h-6 text-purple-400" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-500">GitHub</p>
-                        <a href="https://github.com/minaromanyqwe-max" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-400 transition-colors">https://github.com/minaromanyqwe-max</a>
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center">
+                          <Github className="w-6 h-6 text-purple-400" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-500">GitHub</p>
+                          <a href="https://github.com/minaromanyqwe-max" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-400 transition-colors">https://github.com/minaromanyqwe-max</a>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <ContactForm />
                 </div>
-                <ContactForm />
-              </div>
-            </section>
-            {/* Footer */}
-            <Footer />
+              </section>
+              {/* Footer */}
+              <Footer />
 
-          </main>
+            </main>
+          </div>
         </div>
       </div>
     </>

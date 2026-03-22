@@ -19,8 +19,8 @@ export default function About() {
              </h2>
             <div className="h-[2px] w-24 bg-gradient-to-r from-blue-500 to-transparent"></div>
           </div>
-                                          <div className="grid md:grid-cols-2 gap-16 items-start">
-                      <div className="space-y-6 text-gray-400 text-lg">
+          <div className="max-w-4xl">
+            <div className="space-y-8 text-gray-400 text-lg md:text-xl leading-relaxed">
                         <p>
                         As a passionate front-end developer with a background in computer science, I specialize in building high-performance, responsive web applications that bridge complex back-end systems with intuitive user interfaces.
                         </p>

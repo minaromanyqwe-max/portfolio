@@ -6,13 +6,13 @@ import GradientText from "@/components/GradientText";
 
 export default function Project() {
 const projects = [
-  {
+    {
     name: "E-ecommerce",
     url: "https://ecommice-pgoy.vercel.app",
     description: "Real-time updates and interactive elements in a sleek interface.",
     tech: ["Next.js", "Firebase", "Tailwind"],
     color: "from-orange-500/20 to-rose-500/20",
-    imageUrl: "./ee.png",
+    imageUrl: "/ee.png",
   },
     {
     name: "Games",
@@ -20,7 +20,7 @@ const projects = [
     description: "project very good",
     tech: ["Next.js", "Firebase", "Tailwind"],
     color: "from-orange-500/20 to-rose-500/20",
-    imageUrl: "./Screenshot 2026-03-23 011221.png",
+    imageUrl: "/Screenshot 2026-03-23 011221.png",
   },
 
   {
@@ -29,7 +29,7 @@ const projects = [
     description: "A robust Create, Read, Update, and Delete system for data management.",
     tech: ["React", "Redux", "Bootstrap"],
     color: "from-indigo-500/20 to-blue-500/20",
-    imageUrl: "./ecomec.png",
+    imageUrl: "/ecomec.png",
   },
   {
     name: "CRUD System ",
@@ -45,7 +45,7 @@ const projects = [
     description: "Live weather updates with detailed forecasts and dynamic visuals.",
     tech: ["React", "OpenWeather API", "Tailwind"],
     color: "from-blue-400/20 to-cyan-400/20",
-    imageUrl: "Screenshot 2026-03-01 234849.png",
+    imageUrl: "/Screenshot 2026-03-01 234849.png",
   },
   {
     name: "Weather App HTML",
@@ -53,7 +53,7 @@ const projects = [
     description: "Live weather updates with detailed forecasts and dynamic visuals.",
     tech: ["HTML", "CSS"],
     color: "from-blue-400/20 to-cyan-400/20",
-    imageUrl: "Screenshot 2026-03-01 234523.png",
+    imageUrl: "/Screenshot 2026-03-01 234523.png",
   },
   {
     name: "Object Discovery App",
@@ -61,7 +61,7 @@ const projects = [
     description: "Live weather updates with detailed forecasts and dynamic visuals.",
     tech: ["HTML", "CSS"],
     color: "from-blue-400/20 to-cyan-400/20",
-    imageUrl: "Screenshot 2026-03-01 234616.png",
+    imageUrl: "/Screenshot 2026-03-01 234616.png",
   },
 ];
 return (
@@ -105,7 +105,7 @@ return (
             </div>
 
             {/* Content */}
-            <div className="p-6 flex flex-col h-[260px]">
+            <div className="p-6 flex flex-col min-h-[260px]">
               <h3 className="text-xl font-bold mb-2">
                 {project.name}
               </h3>

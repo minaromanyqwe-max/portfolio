@@ -44,7 +44,7 @@ export default function Footer() {
 
         {/* نصوص الحقوق */}
         <div className="space-y-2">
-          <p className="text-gray-500 text-sm tracking-wide">
+          <p className="text-gray-500 text-sm tracking-wide" suppressHydrationWarning>
             © {new Date().getFullYear()} <span className="text-gray-300 font-medium">Mina Romany</span>. All rights reserved.
           </p>
           <p className="text-[10px] text-gray-600 uppercase tracking-[0.2em]">
