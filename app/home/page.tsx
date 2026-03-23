@@ -46,8 +46,8 @@ export default function HOME() {
         className="flex justify-center md:justify-start"
       >
 <ProfileCard
-  name="Mina Romany"
-  title="Front-End Developer"
+  name=""
+  title=""
   handle="minaromany"
   status="Available for Work"
   contactText="Hire Me"
@@ -71,7 +71,7 @@ export default function HOME() {
         transition={{ duration: 0.6 }}
         className="space-y-8"
       >
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold leading-tight pt-7">
           <GradientText
             colors={['#5227FF', '#FF9FFC', '#B19EEF', '#e11414']}
             animationSpeed={8}
