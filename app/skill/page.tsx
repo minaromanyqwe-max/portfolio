@@ -74,7 +74,7 @@ export default function Skills() {
               {category.title}
             </motion.h3>
             
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
               {category.items.map((skill, i) => (
                 <motion.div
                   key={skill.name}
@@ -83,7 +83,7 @@ export default function Skills() {
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   viewport={{ once: true }}
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative rounded-2xl glass p-8 flex flex-col items-center gap-5 transition-all duration-300 border border-white/5 hover:border-blue-500/30 overflow-hidden"
+                  className="group relative rounded-2xl glass p-4 sm:p-6 md:p-8 flex flex-col items-center gap-3 sm:gap-5 transition-all duration-300 border border-white/5 hover:border-blue-500/30 overflow-hidden"
                 >
                   {/* Subtle Background Glow */}
                   <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b ${skill.glow} to-transparent blur-2xl rounded-full translate-y-10`} />

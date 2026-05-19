@@ -31,14 +31,14 @@ export default function Navbar() {
       as="nav"
       className={clsx(
         "fixed left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl transition-all duration-500",
-        scrolled ? "top-6" : "top-8"
+        scrolled ? "top-4 sm:top-6" : "top-6 sm:top-8"
       )}
     >
       {({ open }) => (
         <>
           <div className={clsx(
-            "glass transition-all duration-500 rounded-2xl px-8 py-4 flex items-center justify-between shadow-[0_0_30px_rgba(0,0,0,0.5)]",
-            scrolled ? "py-3 bg-black/60 border-white/10" : "bg-white/5 border-white/5"
+            "glass transition-all duration-500 rounded-2xl px-4 sm:px-6 md:px-8 py-3.5 md:py-4 flex items-center justify-between shadow-[0_0_30px_rgba(0,0,0,0.5)]",
+            scrolled ? "py-2.5 md:py-3 bg-black/60 border-white/10" : "bg-white/5 border-white/5"
           )}>
             
             {/* Logo */}
@@ -53,7 +53,7 @@ export default function Navbar() {
             </a>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-10">
+            <div className="hidden md:flex items-center gap-4 lg:gap-10">
               {navigation.map((item) => (
                 <a
                   key={item.name}

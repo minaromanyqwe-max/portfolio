@@ -145,12 +145,12 @@ export default function Portfolio() {
             <Skills />
             <Project />
             <Experience />
-
+            
             {/* Final Contact Section */}
-            <section id="contact" className="relative py-20 px-4 md:px-8 bg-white/[0.02] border border-white/5 rounded-[3rem] overflow-hidden">
+            <section id="contact" className="relative py-12 md:py-20 px-4 sm:px-6 md:px-8 bg-white/[0.02] border border-white/5 rounded-[2rem] sm:rounded-[3rem] overflow-hidden">
               <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 blur-[120px] -z-10" />
               
-              <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div className="space-y-8">
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
@@ -160,32 +160,32 @@ export default function Portfolio() {
                     <MessageSquare className="w-4 h-4" /> Available for Hire
                   </motion.div>
                   
-                  <h2 className="text-5xl md:text-6xl font-black text-white leading-tight">
+                  <h2 className="text-3xl sm:text-5xl md:text-6xl font-black text-white leading-tight">
                     Let&apos;s build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Legendary.</span>
                   </h2>
                   
-                  <p className="text-gray-400 text-lg max-w-md leading-relaxed">
+                  <p className="text-gray-400 text-base sm:text-lg max-w-md leading-relaxed">
                     I thrive on turning complex ideas into digital reality. Reach out for collaborations or just a tech chat!
                   </p>
 
                   <div className="grid gap-4 pt-4">
-                    <a href="mailto:minaromanyqwe@gmail.com" className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-blue-500/30 transition-all">
-                      <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <a href="mailto:minaromanyqwe@gmail.com" className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-blue-500/30 transition-all min-w-0 w-full">
+                      <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all shrink-0">
                         <Mail className="w-6 h-6" />
                       </div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <p className="text-[10px] uppercase font-bold text-gray-500 tracking-tighter">Email Me</p>
-                        <p className="text-white font-medium">minaromanyqwe@gmail.com</p>
+                        <p className="text-white font-medium text-sm sm:text-base truncate break-all">minaromanyqwe@gmail.com</p>
                       </div>
                     </a>
                     
-                    <a href="https://github.com/minaromanyqwe-max" target="_blank" className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-all">
-                      <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition-all">
+                    <a href="https://github.com/minaromanyqwe-max" target="_blank" className="group flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-all min-w-0 w-full">
+                      <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition-all shrink-0">
                         <Github className="w-6 h-6" />
                       </div>
-                      <div>
+                      <div className="min-w-0 flex-1">
                         <p className="text-[10px] uppercase font-bold text-gray-500 tracking-tighter">Follow on GitHub</p>
-                        <p className="text-white font-medium">minaromanyqwe-max</p>
+                        <p className="text-white font-medium text-sm sm:text-base truncate break-all">minaromanyqwe-max</p>
                       </div>
                     </a>
                   </div>
@@ -195,7 +195,7 @@ export default function Portfolio() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  className="relative p-8 md:p-12 rounded-[2.5rem] bg-zinc-900/50 backdrop-blur-2xl border border-white/10 shadow-2xl"
+                  className="relative p-5 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] bg-zinc-900/50 backdrop-blur-2xl border border-white/10 shadow-2xl"
                 >
                   <div className="flex items-center gap-2 mb-8 text-blue-400">
                     <Sparkles className="w-5 h-5" />

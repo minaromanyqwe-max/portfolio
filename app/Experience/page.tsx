@@ -71,7 +71,7 @@ export default function Experience() {
               viewport={{ once: true }}
               className={clsx(
                 "relative flex flex-col md:flex-row items-center gap-10",
-                index % 2 === 0 ? "md:flex-row-reverse text-right" : "text-left"
+                index % 2 === 0 ? "md:flex-row-reverse md:text-right text-left" : "text-left"
               )}
             >
               {/* Central Circle Dot */}
@@ -92,14 +92,14 @@ export default function Experience() {
                   
                   {/* Header Row */}
                   <div className={clsx(
-                    "flex flex-col md:flex-row items-center gap-4 mb-8",
+                    "flex flex-row items-center gap-4 mb-8",
                     index % 2 === 0 ? "md:flex-row-reverse" : ""
                   )}>
-                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${exp.color} flex items-center justify-center shadow-2xl group-hover:rotate-[15deg] transition-transform duration-500`}>
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${exp.color} flex items-center justify-center shadow-2xl group-hover:rotate-[15deg] transition-transform duration-500 shrink-0`}>
                       {exp.type === 'work' ? <Briefcase className="w-7 h-7 text-white" /> : <GraduationCap className="w-7 h-7 text-white" />}
                     </div>
                     <div className={clsx(
-                        "flex flex-col",
+                        "flex flex-col items-start",
                         index % 2 === 0 ? "md:items-end" : "md:items-start"
                     )}>
                         <h4 className="text-2xl md:text-3xl font-bold text-white tracking-tight leading-none mb-2 group-hover:text-blue-400 transition-colors">
@@ -120,7 +120,7 @@ export default function Experience() {
                   {/* Footer (Date) */}
                   <div className={clsx(
                     "flex items-center",
-                    index % 2 === 0 ? "justify-end" : "justify-start"
+                    index % 2 === 0 ? "md:justify-end justify-start" : "justify-start"
                   )}>
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-sm font-medium">
                         <Calendar className="w-4 h-4 text-blue-500" />
