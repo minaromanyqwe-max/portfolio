@@ -2,7 +2,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import GradientText from "@/components/GradientText";
-import { Briefcase, GraduationCap } from "lucide-react"; // أضفنا أيقونات للتوضيح
+import { Briefcase, GraduationCap, MapPin, Calendar, ArrowUpRight } from "lucide-react";
+import clsx from "clsx";
 
 export default function Experience() {
   const experiences = [
@@ -11,7 +12,7 @@ export default function Experience() {
       title: "Front-End Developer",
       place: "Route Academy",
       type: "work",
-      color: "from-blue-600 to-cyan-400",
+      color: "from-blue-500 to-cyan-400",
       description:
         "Building and deploying real-world web applications using React, Next.js, and modern CSS frameworks. Focused on API integration and state management.",
     },
@@ -20,88 +21,126 @@ export default function Experience() {
       title: "Bachelor of Information Systems",
       place: "Al Jazeera Higher Institute",
       type: "education",
-      color: "from-purple-600 to-pink-500",
+      color: "from-purple-500 to-pink-500",
       description:
         "Studies in algorithms, data structures, and systems engineering. Building a solid foundation in computer engineering principles.",
     },
   ];
 
   return (
-    <section id="studies" className="mb-40 px-4 md:px-0">
+    <section id="studies" className="relative py-32 px-4 overflow-hidden">
       {/* Header */}
-      <div className="flex items-center gap-4 mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold">
-          <GradientText
-            colors={["#5227FF", "#FF9FFC", "#5227FF", "#4ade80"]}
-            animationSpeed={6}
-            showBorder={false}
-          >
-            My Journey
-          </GradientText>
-        </h2>
-        <div className="h-[1px] flex-grow bg-gradient-to-r from-blue-500/50 to-transparent" />
+      <div className="flex flex-col items-center mb-24 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/5 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-xl"
+        >
+          <MapPin className="w-4 h-4" /> My Roadmap
+        </motion.div>
+        
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight text-white"
+        >
+          Education & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Experience</span>
+        </motion.h2>
+        
+        <motion.div 
+          initial={{ width: 0 }}
+          whileInView={{ width: "80px" }}
+          viewport={{ once: true }}
+          className="h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+        />
       </div>
 
-      {/* Timeline Container */}
-      <div className="relative max-w-4xl mx-auto">
-        {/* Vertical Line with Gradient */}
-        <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-500 via-purple-500 to-transparent opacity-20 hidden md:block" />
+      <div className="relative max-w-6xl mx-auto px-4 md:px-0">
+        {/* The Center Vertical Line (Desktop) */}
+        <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-transparent hidden md:block" />
 
-        <div className="space-y-12">
+        <div className="space-y-24">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: index * 0.2 }}
               viewport={{ once: true }}
               className={clsx(
-                "relative flex flex-col md:flex-row items-center justify-between gap-8",
-                index % 2 === 0 ? "md:flex-row-reverse" : ""
+                "relative flex flex-col md:flex-row items-center gap-10",
+                index % 2 === 0 ? "md:flex-row-reverse text-right" : "text-left"
               )}
             >
-              {/* Dot on the line (Desktop) */}
-              <div className="absolute left-0 md:left-1/2 -translate-x-1/2 hidden md:flex items-center justify-center z-10">
-                <div className={`w-4 h-4 rounded-full bg-gradient-to-r ${exp.color} ring-4 ring-black shadow-[0_0_15px_rgba(59,130,246,0.5)]`} />
+              {/* Central Circle Dot */}
+              <div className="absolute left-0 md:left-1/2 -translate-x-1/2 flex items-center justify-center z-20">
+                 <div className="w-12 h-12 rounded-2xl glass border border-white/10 flex items-center justify-center rotate-45 group-hover:rotate-90 transition-transform duration-500">
+                    <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${exp.color} -rotate-45 shadow-[0_0_15px_rgba(59,130,246,0.5)]`} />
+                 </div>
               </div>
 
-              {/* Card Container */}
-              <div className="w-full md:w-[45%]">
-                <div className="group relative rounded-3xl bg-white/[0.03] backdrop-blur-sm border border-white/10 p-8 hover:bg-white/[0.07] hover:border-blue-500/50 transition-all duration-500 shadow-xl">
-                  {/* Icon Badge */}
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${exp.color} flex items-center justify-center mb-4 shadow-lg group-hover:scale-110 transition-transform`}>
-                    {exp.type === 'work' ? <Briefcase className="w-5 h-5 text-white" /> : <GraduationCap className="w-5 h-5 text-white" />}
+              {/* Card */}
+              <div className="w-full md:w-[46%] ml-8 md:ml-0">
+                <motion.div 
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className="group relative rounded-[2.5rem] bg-zinc-900/40 backdrop-blur-xl border border-white/5 p-8 md:p-10 hover:border-blue-500/30 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+                >
+                  {/* Decorative Glow */}
+                  <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${exp.color} opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-[80px] rounded-full`} />
+                  
+                  {/* Header Row */}
+                  <div className={clsx(
+                    "flex flex-col md:flex-row items-center gap-4 mb-8",
+                    index % 2 === 0 ? "md:flex-row-reverse" : ""
+                  )}>
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${exp.color} flex items-center justify-center shadow-2xl group-hover:rotate-[15deg] transition-transform duration-500`}>
+                      {exp.type === 'work' ? <Briefcase className="w-7 h-7 text-white" /> : <GraduationCap className="w-7 h-7 text-white" />}
+                    </div>
+                    <div className={clsx(
+                        "flex flex-col",
+                        index % 2 === 0 ? "md:items-end" : "md:items-start"
+                    )}>
+                        <h4 className="text-2xl md:text-3xl font-bold text-white tracking-tight leading-none mb-2 group-hover:text-blue-400 transition-colors">
+                            {exp.title}
+                        </h4>
+                        <div className="flex items-center gap-2 text-blue-400 font-semibold text-sm">
+                            <MapPin className="w-4 h-4" />
+                            {exp.place}
+                        </div>
+                    </div>
                   </div>
 
-                  <span className="text-xs font-bold tracking-widest text-blue-400 uppercase mb-2 block">
-                    {exp.date}
-                  </span>
-
-                  <h4 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
-                    {exp.title}
-                  </h4>
-
-                  <p className="text-gray-400 font-medium mb-4 italic text-sm">
-                    {exp.place}
-                  </p>
-
-                  <p className="text-gray-500 leading-relaxed text-sm">
+                  {/* Description */}
+                  <p className="text-gray-400 leading-relaxed text-base md:text-lg font-light mb-8">
                     {exp.description}
                   </p>
-                </div>
+
+                  {/* Footer (Date) */}
+                  <div className={clsx(
+                    "flex items-center",
+                    index % 2 === 0 ? "justify-end" : "justify-start"
+                  )}>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-sm font-medium">
+                        <Calendar className="w-4 h-4 text-blue-500" />
+                        {exp.date}
+                    </div>
+                  </div>
+
+                  {/* Tiny Icon Link Decoration */}
+                  <div className="absolute top-6 right-6 text-white/10 group-hover:text-blue-500/40 transition-colors">
+                    <ArrowUpRight className="w-8 h-8" />
+                  </div>
+                </motion.div>
               </div>
 
-              {/* Spacer for Desktop Layout */}
-              <div className="hidden md:block md:w-[45%]" />
+              {/* Empty Space for Desktop */}
+              <div className="hidden md:block md:w-[46%]" />
             </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
-}
-
-// دالة مساعدة بسيطة للـ classes
-function clsx(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
 }

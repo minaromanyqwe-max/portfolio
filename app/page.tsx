@@ -1,14 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import { useInView } from "react-intersection-observer";
 import clsx from "clsx";
-import {
-  Mail,
-  Github,
-} from "lucide-react";
+import { Mail, Github, Send, MessageSquare, Sparkles } from "lucide-react";
 import Project from "./project/page";
 import Skills from "./skill/page";
 import Footer from "@/components/Footer";
@@ -17,36 +14,26 @@ import Navbar from '@/components/Navbar';
 import HOME from "./home/page";
 import Particles from "@/components/Particles";
 import SplashCursor from "@/components/SplashCursor";
-import GradientText from "@/components/GradientText";
-import { useEffect } from "react";
 import Experience from "./Experience/page";
 import Loading from "@/components/Loading";
-import { AnimatePresence } from "framer-motion";
-
 
 function ContactForm() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const { ref, inView } = useInView({ threshold: 0.3 });
+  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!email || !message) {
       toast.error("Please fill in all fields");
       return;
     }
-
     setLoading(true);
-
     try {
-      // Send email via API route
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, message }),
       });
 
@@ -55,11 +42,10 @@ function ContactForm() {
         setEmail("");
         setMessage("");
       } else {
-        toast.error("Failed to send message. Please try again.");
+        toast.error("Failed to send message.");
       }
     } catch (error) {
-      toast.error("An error occurred. Please try again later.");
-      console.error("Form submission error:", error);
+      toast.error("An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -69,58 +55,47 @@ function ContactForm() {
     <motion.form
       ref={ref}
       onSubmit={handleSubmit}
-      initial={{ opacity: 0, x: 20 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      className="space-y-6"
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6 }}
+      className="space-y-5"
     >
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Your Email
-        </label>
+      <div className="space-y-2">
+        <label className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 ml-1">Your Email</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className={clsx(
-            "w-full px-4 py-3 rounded-xl bg-[#1f1e24] border transition-all",
-            "focus:outline-none focus:border-blue-500",
-            "border-[#ffffff0d] text-white placeholder-gray-500",
-            "hover:border-blue-500/50"
-          )}
-          placeholder="your.email@example.com"
+          className="w-full px-5 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 transition-all backdrop-blur-md"
+          placeholder="name@example.com"
         />
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Message
-        </label>
+      <div className="space-y-2">
+        <label className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500 ml-1">Message</label>
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          rows={4}
-          className={clsx(
-            "w-full px-4 py-3 rounded-xl bg-[#1f1e24] border transition-all",
-            "focus:outline-none focus:border-blue-500",
-            "border-[#ffffff0d] text-white placeholder-gray-500",
-            "hover:border-blue-500/50 resize-none"
-          )}
-          placeholder="Your message here..."
+          rows={5}
+          className="w-full px-5 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/10 transition-all backdrop-blur-md resize-none"
+          placeholder="Tell me about your project..."
         />
       </div>
 
       <motion.button
-        whileHover={{ scale: 1.02 }}
+        whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.98 }}
         disabled={loading}
-        className={clsx(
-          "w-full py-3 px-4 rounded-xl font-bold transition-all",
-          "bg-gradient-to-r from-blue-500 to-purple-600",
-          "hover:shadow-lg hover:shadow-blue-500/50",
-          "disabled:opacity-50 disabled:cursor-not-allowed"
-        )}
+        className="group relative w-full py-4 rounded-2xl font-bold text-white overflow-hidden shadow-2xl shadow-blue-500/20 disabled:opacity-50"
       >
-        {loading ? "Sending..." : "Send Message"}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 transition-transform group-hover:scale-105" />
+        <span className="relative flex items-center justify-center gap-2">
+          {loading ? "Sending..." : (
+            <>
+              Send Message <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </>
+          )}
+        </span>
       </motion.button>
     </motion.form>
   );
@@ -130,11 +105,7 @@ export default function Portfolio() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulated loading delay (you can adjust or use real data fetching)
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1200);
-
+    const timer = setTimeout(() => setLoading(false), 1200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -144,96 +115,101 @@ export default function Portfolio() {
         {loading && <Loading key="loader" />}
       </AnimatePresence>
 
-      <div className={clsx("transition-opacity duration-1000", loading ? "opacity-0" : "opacity-100")}>
-        <Toaster position="top-center" />
+      <div className={clsx(
+        "transition-opacity duration-1000 bg-[#030303] selection:bg-blue-500/30", 
+        loading ? "opacity-0" : "opacity-100"
+      )}>
+        <Toaster position="bottom-right" reverseOrder={false} />
         <Navbar />
         
-        <div className="relative bg-[#0f0e13] text-white font-['Poppins']">
-          {/* Background Particles */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Persistent Background Effects */}
+        <div className="fixed inset-0 z-0">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(17,24,39,1)_0%,rgba(3,3,3,1)_100%)]" />
+          <div className="opacity-30">
             <Particles
-              particleCount={200}
-              particleSpread={10}
-              speed={0.1}
-              particleColors={["#ffffff"]}
-              moveParticlesOnHover
-              particleHoverFactor={1}
-              alphaParticles={false}
-              particleBaseSize={100}
-              sizeRandomness={1}
-              cameraDistance={20}
-              disableRotation={false}
+              particleCount={80}
+              speed={0.01}
+              particleColors={["#3b82f6", "#8b5cf6"]}
+              alphaParticles={true}
+              particleBaseSize={40}
             />
           </div>
-          <div className="absolute inset-0 pointer-events-none">
-            <SplashCursor
-              SIM_RESOLUTION={128}
-              DYE_RESOLUTION={1440}
-              DENSITY_DISSIPATION={3.5}
-              VELOCITY_DISSIPATION={2}
-              PRESSURE={0.1}
-              CURL={3}
-              SPLAT_RADIUS={0.2}
-              SPLAT_FORCE={6000}
-              COLOR_UPDATE_SPEED={10}
-            />
-          </div>
-          {/* Content */}
-          <div className="relative z-10 flex justify-center items-center">
-            <main className="flex-1 px-4 sm:px-6 md:px-12 lg:px-20 py-12 max-w-7xl mx-auto overflow-hidden">
-              {/* Hero Section */}
-              <HOME />
-              {/* About Section */}
-              <About />
-              {/* Skills Section */}
-              <Skills />
-              {/* Projects Section */}
-              <Project />
-              {/* Experience / Education */}
-              <Experience/>
-              {/* Contact Section */}
-              <section id="contact" className="mb-40">
-                <div className="flex items-center gap-4 mb-12">
-                  <h2 className="text-3xl font-bold">Get In Touch</h2>
-                  <div className="h-0.5 w-24 bg-gradient-to-r from-blue-500 to-transparent"></div>
+          <SplashCursor />
+        </div>
+
+        {/* Content Wrapper */}
+        <div className="relative z-10">
+          <main className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-16 md:space-y-24 pb-20 mt-16 md:mt-24">
+            <HOME />
+            <About />
+            <Skills />
+            <Project />
+            <Experience />
+
+            {/* Final Contact Section */}
+            <section id="contact" className="relative py-20 px-4 md:px-8 bg-white/[0.02] border border-white/5 rounded-[3rem] overflow-hidden">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 blur-[120px] -z-10" />
+              
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <div className="space-y-8">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest"
+                  >
+                    <MessageSquare className="w-4 h-4" /> Available for Hire
+                  </motion.div>
+                  
+                  <h2 className="text-5xl md:text-6xl font-black text-white leading-tight">
+                    Let&apos;s build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Legendary.</span>
+                  </h2>
+                  
+                  <p className="text-gray-400 text-lg max-w-md leading-relaxed">
+                    I thrive on turning complex ideas into digital reality. Reach out for collaborations or just a tech chat!
+                  </p>
+
+                  <div className="grid gap-4 pt-4">
+                    <a href="mailto:minaromanyqwe@gmail.com" className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-blue-500/30 transition-all">
+                      <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                        <Mail className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase font-bold text-gray-500 tracking-tighter">Email Me</p>
+                        <p className="text-white font-medium">minaromanyqwe@gmail.com</p>
+                      </div>
+                    </a>
+                    
+                    <a href="https://github.com/minaromanyqwe-max" target="_blank" className="group flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-purple-500/30 transition-all">
+                      <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition-all">
+                        <Github className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase font-bold text-gray-500 tracking-tighter">Follow on GitHub</p>
+                        <p className="text-white font-medium">minaromanyqwe-max</p>
+                      </div>
+                    </a>
+                  </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-6">
-                    <p className="text-xl text-gray-400 mb-8">
-                      Have a project in mind? Let&apos;s collaborate and create something amazing together!
-                    </p>
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
-                          <Mail className="w-6 h-6 text-blue-400" />
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-500">Email</p>
-                          <a href="mailto:minaromanyqwe@gmail.com" className="text-white hover:text-blue-400 transition-colors">minaromanyqwe@gmail.com</a>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center">
-                          <Github className="w-6 h-6 text-purple-400" />
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-500">GitHub</p>
-                          <a href="https://github.com/minaromanyqwe-max" target="_blank" rel="noopener noreferrer" className="text-white hover:text-purple-400 transition-colors">https://github.com/minaromanyqwe-max</a>
-                        </div>
-                      </div>
-                    </div>
+
+                {/* Form Container */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  className="relative p-8 md:p-12 rounded-[2.5rem] bg-zinc-900/50 backdrop-blur-2xl border border-white/10 shadow-2xl"
+                >
+                  <div className="flex items-center gap-2 mb-8 text-blue-400">
+                    <Sparkles className="w-5 h-5" />
+                    <span className="font-bold tracking-tight">Drop a message</span>
                   </div>
                   <ContactForm />
-                </div>
-              </section>
-              {/* Footer */}
-              <Footer />
-
-            </main>
-          </div>
+                </motion.div>
+              </div>
+            </section>
+            
+            <Footer />
+          </main>
         </div>
       </div>
     </>
   );
 }
-

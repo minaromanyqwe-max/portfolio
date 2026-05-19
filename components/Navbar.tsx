@@ -4,19 +4,20 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const navigation = [
   { name: 'Home', href: '#home' },
-  { name: 'Projects', href: '#projects' },
+  { name: 'About', href: '#about' },
   { name: 'Skills', href: '#skills' },
-  { name: 'Studies', href: '#studies' }, // تعديل الـ href ليكون Slug سليم
+  { name: 'Projects', href: '#projects' },
+  { name: 'Journey', href: '#studies' },
   { name: 'Contact', href: '#contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
-  // إضافة تأثير عند السكرول لتقليل حجم النوافبار أو تغيير شفافيته
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -29,83 +30,93 @@ export default function Navbar() {
     <Disclosure
       as="nav"
       className={clsx(
-        "fixed left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl transition-all duration-300",
-        scrolled ? "top-2" : "top-4" // بيتحرك سنة بسيطة لما تنزل
+        "fixed left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl transition-all duration-500",
+        scrolled ? "top-6" : "top-8"
       )}
     >
       {({ open }) => (
         <>
-          {/* Main Bar */}
           <div className={clsx(
-            "backdrop-blur-xl border transition-all duration-300 rounded-full px-6 py-3 flex items-center justify-between shadow-lg",
-            scrolled ? "bg-black/40 border-white/20" : "bg-white/5 border-white/10"
+            "glass transition-all duration-500 rounded-2xl px-8 py-4 flex items-center justify-between shadow-[0_0_30px_rgba(0,0,0,0.5)]",
+            scrolled ? "py-3 bg-black/60 border-white/10" : "bg-white/5 border-white/5"
           )}>
             
             {/* Logo */}
             <a
               href="#home"
-              className="font-bold text-xl tracking-tighter text-white group"
+              className="font-black text-2xl tracking-tighter text-white group flex items-center gap-1"
             >
-              Mina<span className="text-blue-500 group-hover:animate-pulse">.</span>
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform">
+                <span className="text-white text-base">M</span>
+              </div>
+              <span>R<span className="text-blue-500 group-hover:animate-pulse">.</span></span>
             </a>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-10">
               {navigation.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
                   className={clsx(
-                    'text-sm font-medium text-gray-300 hover:text-white transition-all relative group',
+                    'text-xs font-black uppercase tracking-widest text-gray-400 hover:text-white transition-all relative group',
                   )}
                 >
                   {item.name}
-                  {/* Underline Animation Improved */}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full" />
                 </a>
               ))}
             </div>
 
-            {/* Action Button (Optional) - ممكن تضيف زرار سريع للـ CV هنا */}
+            {/* Action Button */}
             <div className="hidden md:block">
-               <a 
+               <motion.a 
+                 whileHover={{ scale: 1.05 }}
+                 whileTap={{ scale: 0.95 }}
                  href="/Mina%20Romany%20Abdel-shaheed.CV.pdf" 
-                 className="bg-blue-600 hover:bg-blue-700 text-white text-xs px-4 py-2 rounded-full transition-all shadow-md shadow-blue-500/20"
+                 className="bg-white text-black text-[10px] font-black uppercase tracking-widest px-6 py-2.5 rounded-xl transition-all shadow-xl hover:shadow-white/10"
                >
                  Resume
-               </a>
+               </motion.a>
             </div>
 
             {/* Mobile Button */}
             <div className="md:hidden">
-              <DisclosureButton className="inline-flex items-center justify-center rounded-full p-2 text-gray-300 hover:text-white hover:bg-white/10 transition outline-none">
+              <DisclosureButton className="inline-flex items-center justify-center rounded-xl p-2 text-gray-300 hover:text-white hover:bg-white/5 transition outline-none border border-white/5">
                 <span className="sr-only">Open menu</span>
                 {open ? (
-                  <XMarkIcon className="h-6 w-6" />
+                  <XMarkIcon className="h-5 w-5" />
                 ) : (
-                  <Bars3Icon className="h-6 w-6" />
+                  <Bars3Icon className="h-5 w-5" />
                 )}
               </DisclosureButton>
             </div>
           </div>
 
-          {/* Mobile Panel with Animation */}
-          <DisclosurePanel className="md:hidden mt-4 origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0">
-            <div className="rounded-3xl backdrop-blur-2xl bg-black/60 border border-white/10 p-6 space-y-4 shadow-2xl">
+          <DisclosurePanel className="md:hidden mt-4 origin-top transition duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0">
+            <div className="rounded-2xl glass p-8 space-y-6 shadow-2xl">
               {navigation.map((item) => (
                 <DisclosureButton
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className="block text-gray-300 hover:text-blue-400 font-medium text-lg transition-colors"
+                  className="block text-gray-400 hover:text-white font-black text-sm uppercase tracking-widest transition-colors"
                 >
                   {item.name}
                 </DisclosureButton>
               ))}
+              <div className="pt-4 border-t border-white/5">
+                 <a 
+                   href="/Mina%20Romany%20Abdel-shaheed.CV.pdf" 
+                   className="block text-center bg-white text-black text-[10px] font-black uppercase tracking-widest py-4 rounded-xl"
+                 >
+                   Download Resume
+                 </a>
+              </div>
             </div>
           </DisclosurePanel>
         </>
       )}
     </Disclosure>
   );
-}
+}
