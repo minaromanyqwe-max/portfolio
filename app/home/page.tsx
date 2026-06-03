@@ -35,7 +35,7 @@ export default function HOME() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-center items-center lg:grid lg:grid-cols-12 gap-8 lg:gap-12 pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center items-center lg:grid lg:grid-cols-12 gap-8 lg:gap-12 pt-28 pb-16 px-4 sm:px-8 lg:px-12 max-w-[90rem] mx-auto overflow-hidden"
     >
       {/* Background Glows */}
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
@@ -79,11 +79,11 @@ export default function HOME() {
         {/* Improved Typing Area */}
         <div className="h-8 sm:h-10 md:h-12 flex items-center justify-center lg:justify-start">
           <p className="text-xl sm:text-2xl md:text-3xl text-gray-400 font-light tracking-tight">
-            A Creative <span className="text-white font-bold bg-clip-text">{text}</span>
+            A Creative <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-extrabold">{text}</span>
             <motion.span 
               animate={{ opacity: [1, 0] }}
               transition={{ repeat: Infinity, duration: 0.8 }}
-              className="inline-block ml-1 w-1 sm:w-1.5 h-6 sm:h-8 bg-blue-500 rounded-full align-middle"
+              className="inline-block ml-1.5 w-1 sm:w-1.5 h-6 sm:h-8 bg-blue-500 rounded-full align-middle"
             />
           </p>
         </div>
@@ -98,11 +98,21 @@ export default function HOME() {
           <motion.a
             whileHover={{ y: -5, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            href="/Mina Romany Abdel-shaheed.CV.pdf"
+            href="/cv"
+            className="group relative px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-black rounded-[1.2rem] flex items-center justify-center gap-3 transition-all shadow-xl shadow-blue-500/20 text-sm sm:text-base border border-blue-400/20"
+          >
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-white animate-pulse" />
+            <span>Interactive CV</span>
+          </motion.a>
+
+          <motion.a
+            whileHover={{ y: -5, scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            href="/Mina%20Romany%20Abdel-shaheed.CV.pdf"
             className="group relative px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-black font-black rounded-[1.2rem] flex items-center justify-center gap-3 transition-all shadow-xl shadow-white/10 text-sm sm:text-base"
           >
             <Download className="w-4 h-4 sm:w-5 sm:h-5 group-hover:animate-bounce" /> 
-            Get Resume
+            Get PDF CV
           </motion.a>
 
           <motion.a
@@ -110,7 +120,7 @@ export default function HOME() {
             whileTap={{ scale: 0.98 }}
             href="https://www.linkedin.com/in/mina-romani-a1a242367/"
             target="_blank"
-            className="px-8 sm:px-10 py-3.5 sm:py-4 bg-white/5 backdrop-blur-xl border border-white/10 hover:border-blue-500/50 rounded-[1.2rem] font-bold flex items-center justify-center gap-3 transition-all group text-sm sm:text-base"
+            className="px-6 sm:px-8 py-3.5 sm:py-4 bg-white/5 backdrop-blur-xl border border-white/10 hover:border-blue-500/50 rounded-[1.2rem] font-bold flex items-center justify-center gap-3 transition-all group text-sm sm:text-base"
           >
             <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-[#0077B5] group-hover:scale-110 transition-transform" /> 
             <span>LinkedIn</span>
@@ -134,7 +144,7 @@ export default function HOME() {
             name=""
             title=""
             handle="minaromany"
-            status="Available for Work"
+            status="Available for Projects"
             contactText="Hire Me"
             avatarUrl="/imge.png"
             showUserInfo={true}
@@ -143,7 +153,7 @@ export default function HOME() {
               document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
             }}
             behindGlowEnabled={true}
-            innerGradient="rgba(10, 10, 12, 0.9)"
+            innerGradient="linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)"
           />
           
           {/* Floating Badge */}

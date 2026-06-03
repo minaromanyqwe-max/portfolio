@@ -182,14 +182,16 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           </div>
         )}
 
-        {/* الاسم */}
-        <div
-          className="absolute top-10 w-full text-center z-10"
-          style={{ pointerEvents: "none" }}
-        >
-          <h3 className="text-3xl font-bold text-white">{name}</h3>
-          <p className="text-white/70 text-sm mt-1">{title}</p>
-        </div>
+        {/* الاسم واللقب */}
+        {(name || title) && (
+          <div
+            className="absolute top-10 w-full text-center z-10 px-4"
+            style={{ pointerEvents: "none" }}
+          >
+            {name && <h3 className="text-2xl sm:text-3xl font-black text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">{name}</h3>}
+            {title && <p className="text-white/80 text-xs sm:text-sm mt-1 font-medium bg-black/35 backdrop-blur-md px-3 py-1 rounded-full inline-block drop-shadow-md">{title}</p>}
+          </div>
+        )}
       </section>
     </div>
   );

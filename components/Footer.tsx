@@ -3,9 +3,8 @@ import React from 'react';
 
 const socialLinks = [
   { name: 'Github', icon: Github, href: 'https://github.com/minaromanyqwe-max' },
-  { name: 'Linkedin', icon: Linkedin, href: 'https://linkedin.com/in/YOUR_USERNAME' },
-  { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/YOUR_USERNAME' },
-  { name: 'Email', icon: Mail, href: 'minaromanyqwe@gmail.com' },
+  { name: 'Linkedin', icon: Linkedin, href: 'https://www.linkedin.com/in/mina-romani-a1a242367/' },
+  { name: 'Email', icon: Mail, href: 'mailto:minaromanyqwe@gmail.com' },
 ];
 
 export default function Footer() {

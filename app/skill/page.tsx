@@ -23,6 +23,14 @@ const skillCategories = [
       { name: "Tailwind", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", glow: "from-sky-400/20" },
       { name: "Redux", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg", glow: "from-purple-500/20" },
     ]
+  },
+  {
+    title: "Tools & Backend Integration",
+    items: [
+      { name: "Git / GitHub", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg", glow: "from-gray-500/20" },
+      { name: "Firebase", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-original.svg", glow: "from-orange-400/20" },
+      { name: "Bootstrap", img: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg", glow: "from-purple-600/20" },
+    ]
   }
 ];
 
@@ -113,4 +121,4 @@ export default function Skills() {
       </div>
     </section>
   );
-}
+}

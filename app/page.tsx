@@ -12,10 +12,13 @@ import Footer from "@/components/Footer";
 import About from './about/page';
 import Navbar from '@/components/Navbar';
 import HOME from "./home/page";
-import Particles from "@/components/Particles";
-import SplashCursor from "@/components/SplashCursor";
 import Experience from "./Experience/page";
 import Loading from "@/components/Loading";
+import { useAppStore } from "@/lib/store";
+import dynamic from "next/dynamic";
+
+const Particles = dynamic(() => import("@/components/Particles"), { ssr: false });
+const SplashCursor = dynamic(() => import("@/components/SplashCursor"), { ssr: false });
 
 function ContactForm() {
   const [email, setEmail] = useState("");
@@ -103,6 +106,7 @@ function ContactForm() {
 
 export default function Portfolio() {
   const [loading, setLoading] = useState(true);
+  const { lightweightMode } = useAppStore();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1200);
@@ -125,21 +129,31 @@ export default function Portfolio() {
         {/* Persistent Background Effects */}
         <div className="fixed inset-0 z-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(17,24,39,1)_0%,rgba(3,3,3,1)_100%)]" />
+          
+          {/* Glowing tech grid background pattern */}
+          <div 
+            className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" 
+            style={{ 
+              maskImage: 'radial-gradient(ellipse at center, black, transparent 75%)', 
+              WebkitMaskImage: 'radial-gradient(ellipse at center, black, transparent 75%)' 
+            }} 
+          />
+
           <div className="opacity-30">
             <Particles
-              particleCount={80}
-              speed={0.01}
-              particleColors={["#3b82f6", "#8b5cf6"]}
+              particleCount={lightweightMode ? 15 : 80}
+              speed={lightweightMode ? 0.002 : 0.01}
+              particleColors={lightweightMode ? ["#3b82f6"] : ["#3b82f6", "#8b5cf6"]}
               alphaParticles={true}
-              particleBaseSize={40}
+              particleBaseSize={lightweightMode ? 15 : 40}
             />
           </div>
-          <SplashCursor />
+          {!lightweightMode && <SplashCursor />}
         </div>
 
         {/* Content Wrapper */}
         <div className="relative z-10">
-          <main className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16 space-y-16 md:space-y-24 pb-20 mt-16 md:mt-24">
+          <main className="max-w-[90rem] mx-auto px-4 sm:px-8 lg:px-12 space-y-24 md:space-y-36 pb-20 mt-16 md:mt-24">
             <HOME />
             <About />
             <Skills />

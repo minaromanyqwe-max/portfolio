@@ -138,3 +138,11 @@ body {
 .animate-float {
   animation: float 4s ease-in-out infinite;
 }
+
+/* Premium Background Tech Grid Pattern */
+.bg-grid-pattern {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}

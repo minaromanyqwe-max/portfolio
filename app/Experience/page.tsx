@@ -57,7 +57,7 @@ export default function Experience() {
         />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-4 md:px-0">
+      <div className="relative max-w-[90rem] mx-auto px-4 md:px-0">
         {/* The Center Vertical Line (Desktop) */}
         <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-500/50 via-purple-500/50 to-transparent hidden md:block" />
 
@@ -70,7 +70,7 @@ export default function Experience() {
               transition={{ duration: 0.7, delay: index * 0.2 }}
               viewport={{ once: true }}
               className={clsx(
-                "relative flex flex-col md:flex-row items-center gap-10",
+                "group relative flex flex-col md:flex-row items-center gap-10",
                 index % 2 === 0 ? "md:flex-row-reverse md:text-right text-left" : "text-left"
               )}
             >
@@ -85,7 +85,7 @@ export default function Experience() {
               <div className="w-full md:w-[46%] ml-8 md:ml-0">
                 <motion.div 
                   whileHover={{ y: -10, scale: 1.02 }}
-                  className="group relative rounded-[2.5rem] bg-zinc-900/40 backdrop-blur-xl border border-white/5 p-8 md:p-10 hover:border-blue-500/30 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+                  className="relative rounded-[2.5rem] bg-zinc-900/40 backdrop-blur-xl border border-white/5 p-8 md:p-10 hover:border-blue-500/30 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
                 >
                   {/* Decorative Glow */}
                   <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${exp.color} opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-[80px] rounded-full`} />

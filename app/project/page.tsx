@@ -15,12 +15,12 @@ export default function Project() {
       imageUrl: "/ee.png",
     },
     {
-        name: "Justlena Tours",
-        url: "https://justlena-tours.vercel.app",
-        description: "Premium travel and tour booking platform with localized content.",
-        tech: ["Next.js", "Tailwind", "Framer Motion"],
-        imageUrl: "nn.png",
-      },
+      name: "Justlena Tours",
+      url: "https://justlena-tours.vercel.app",
+      description: "Premium travel and tour booking platform with localized content.",
+      tech: ["Next.js", "Tailwind", "Framer Motion"],
+      imageUrl: "/nn.png",
+    },
       {
         name: "Games Platform",
         url: "https://games-kappa-eight.vercel.app",
@@ -66,7 +66,7 @@ export default function Project() {
   ];
 
   return (
-    <section id="projects" className="relative py-8 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
+    <section id="projects" className="relative py-8 md:py-16 px-4 sm:px-8 lg:px-12 max-w-[90rem] mx-auto overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-20 pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full blur-[120px]" />
@@ -133,6 +133,7 @@ export default function Project() {
               <a 
                 href={project.url}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="absolute top-4 right-4 p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white opacity-0 md:group-hover:opacity-100 transition-all duration-300 md:translate-y-2 md:group-hover:translate-y-0 hover:bg-blue-600 sm:opacity-100 sm:translate-y-0"
               >
                 <ExternalLink className="w-5 h-5" />

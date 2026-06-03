@@ -47,7 +47,7 @@ export default function About() {
         />
       </div>
 
-      <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start max-w-7xl mx-auto">
+      <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start max-w-[90rem] mx-auto">
         {/* Left Side: Content */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -73,22 +73,32 @@ export default function About() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
             <motion.div
               whileHover={{ y: -5, scale: 1.02 }}
-              className="bg-white/5 backdrop-blur-xl p-8 rounded-[2rem] border border-white/10 relative overflow-hidden group"
+              className="bg-zinc-900/50 backdrop-blur-xl p-6 rounded-[2rem] border border-white/5 hover:border-blue-500/30 relative overflow-hidden group transition-all duration-300"
             >
               <div className="absolute -top-4 -right-4 bg-blue-500/10 w-24 h-24 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-colors" />
-              <Code2 className="w-10 h-10 text-blue-400 mb-4" />
+              <Code2 className="w-8 h-8 text-blue-400 mb-4" />
               <h4 className="text-white font-black text-4xl mb-1">15+</h4>
               <p className="text-xs text-gray-500 uppercase font-black tracking-widest">Completed Projects</p>
             </motion.div>
 
             <motion.div
               whileHover={{ y: -5, scale: 1.02 }}
-              className="bg-white/5 backdrop-blur-xl p-8 rounded-[2rem] border border-white/10 relative overflow-hidden group"
+              className="bg-zinc-900/50 backdrop-blur-xl p-6 rounded-[2rem] border border-white/5 hover:border-purple-500/30 relative overflow-hidden group transition-all duration-300"
             >
               <div className="absolute -top-4 -right-4 bg-purple-500/10 w-24 h-24 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-colors" />
-              <GraduationCap className="w-10 h-10 text-purple-400 mb-4" />
+              <GraduationCap className="w-8 h-8 text-purple-400 mb-4" />
               <h4 className="text-white font-black text-2xl mb-1 truncate">CS Student</h4>
               <p className="text-xs text-gray-500 uppercase font-black tracking-widest">Al Jazeera Institute</p>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="col-span-1 sm:col-span-2 bg-zinc-900/50 backdrop-blur-xl p-6 rounded-[2rem] border border-white/5 hover:border-emerald-500/30 relative overflow-hidden group transition-all duration-300"
+            >
+              <div className="absolute -top-4 -right-4 bg-emerald-500/10 w-24 h-24 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-colors" />
+              <Sparkles className="w-8 h-8 text-emerald-400 mb-4 animate-pulse" />
+              <h4 className="text-white font-black text-xl mb-1">Speed & Lightweight Focus</h4>
+              <p className="text-xs text-gray-500 uppercase font-black tracking-widest">Optimized structures, clean code, and micro-animations</p>
             </motion.div>
           </div>
         </motion.div>
