@@ -11,11 +11,11 @@ export default function Footer() {
   return (
     <footer className="relative mt-40">
       {/* خط فاصل بتدرج لوني شيك */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
       
       <div className="pt-12 pb-16 text-center container mx-auto px-4">
         {/* اللوجو في الفوتر بيدي لمسة براندينج */}
-        <div className="mb-6 font-bold text-xl text-white">
+        <div className="mb-6 font-bold text-xl text-slate-900 dark:text-white">
           Mina<span className="text-blue-500">.</span>
         </div>
 
@@ -35,7 +35,7 @@ export default function Footer() {
                 {/* تأثير خلفية خفيف عند الهوفر */}
                 <div className="absolute inset-0 bg-blue-500/10 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
                 
-                <Icon className="w-5 h-5 text-gray-400 group-hover:text-blue-400 transition-colors" />
+                <Icon className="w-5 h-5 text-slate-500 dark:text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors" />
               </a>
             );
           })}
@@ -43,10 +43,10 @@ export default function Footer() {
 
         {/* نصوص الحقوق */}
         <div className="space-y-2">
-          <p className="text-gray-500 text-sm tracking-wide" suppressHydrationWarning>
-            © {new Date().getFullYear()} <span className="text-gray-300 font-medium">Mina Romany</span>. All rights reserved.
+          <p className="text-slate-500 dark:text-gray-500 text-sm tracking-wide" suppressHydrationWarning>
+            © {new Date().getFullYear()} <span className="text-slate-700 dark:text-gray-300 font-medium">Mina Romany</span>. All rights reserved.
           </p>
-          <p className="text-[10px] text-gray-600 uppercase tracking-[0.2em]">
+          <p className="text-[10px] text-slate-400 dark:text-gray-600 uppercase tracking-[0.2em]">
             Built with Next.js & Tailwind CSS
           </p>
         </div>

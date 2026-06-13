@@ -103,11 +103,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
       {/* الكارد */}
       <section
-        className="relative overflow-hidden w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]"
+        className="relative overflow-hidden w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px] bg-slate-950/95 dark:bg-black/90 border border-white/5"
         style={{
           aspectRatio: "0.72",
           borderRadius: "30px",
-          background: "rgba(0,0,0,0.9)",
           transform: "rotateX(var(--rx)) rotateY(var(--ry))",
           transition: "transform 0.6s ease"
         }}

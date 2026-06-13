@@ -17,11 +17,23 @@
 
 :root {
   --radius: 1rem;
+  --background: #f8fafc; /* Premium light mode background */
+  --foreground: #0f172a; /* Premium light mode text */
+  --primary: #2563eb;
+  --secondary: #7c3aed;
+  --accent-glow: rgba(37, 99, 235, 0.08);
+  --grid-color: rgba(15, 23, 42, 0.03);
+  --card-bg: #ffffff;
+}
+
+.dark {
   --background: #030303; /* Deep dark for true contrast */
   --foreground: #ffffff;
   --primary: #3b82f6;
   --secondary: #8b5cf6;
   --accent-glow: rgba(59, 130, 246, 0.15);
+  --grid-color: rgba(255, 255, 255, 0.02);
+  --card-bg: #09090b;
 }
 
 body {
@@ -40,7 +52,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #030303;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -74,7 +86,7 @@ body {
 /* Advanced Animated Gradient Border */
 .gradient-border-card {
   position: relative;
-  background: #09090b;
+  background: var(--card-bg);
   border-radius: var(--radius);
 }
 
@@ -84,7 +96,7 @@ body {
   inset: -1px; /* The border thickness */
   border-radius: calc(var(--radius) + 1px);
   padding: 1px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+  background: linear-gradient(45deg, var(--primary), var(--secondary), var(--primary));
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -112,10 +124,10 @@ body {
 .text-shimmer {
   background: linear-gradient(
     to right,
-    #ffffff 20%,
-    #3b82f6 40%,
-    #8b5cf6 60%,
-    #ffffff 80%
+    var(--foreground) 20%,
+    var(--primary) 40%,
+    var(--secondary) 60%,
+    var(--foreground) 80%
   );
   background-size: 200% auto;
   color: transparent;
@@ -143,6 +155,29 @@ body {
 .bg-grid-pattern {
   background-size: 50px 50px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+}
+
+/* View Transitions Circular Reveal Animation Styling */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
+
+.dark::view-transition-new(root) {
+  z-index: 1;
 }

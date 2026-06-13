@@ -6,8 +6,9 @@ import clsx from 'clsx';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { Zap, ZapOff, FileText, ChevronRight } from 'lucide-react';
+import { Zap, ZapOff, Sun, Moon } from 'lucide-react';
 import { useAppStore } from '@/lib/store';
+import { flushSync } from 'react-dom';
 
 const navigation = [
   { name: 'Home', href: '/#home' },
@@ -22,7 +23,7 @@ const navigation = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const { lightweightMode, toggleLightweightMode } = useAppStore();
+  const { lightweightMode, toggleLightweightMode, theme, setTheme } = useAppStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +32,67 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Sync theme with store on mount
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(isDark ? 'dark' : 'light');
+  }, [setTheme]);
+
+  const toggleTheme = (e: React.MouseEvent) => {
+    const isDark = theme === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
+
+    const updateDOM = () => {
+      setTheme(newTheme);
+      const root = document.documentElement;
+      if (newTheme === 'dark') {
+        root.classList.add('dark');
+      } else {
+        root.classList.remove('dark');
+      }
+    };
+
+    if (
+      !(document as any).startViewTransition ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      updateDOM();
+      return;
+    }
+
+    const x = e.clientX;
+    const y = e.clientY;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = (document as any).startViewTransition(() => {
+      flushSync(() => {
+        updateDOM();
+      });
+    });
+
+    transition.ready.then(() => {
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ];
+      document.documentElement.animate(
+        {
+          clipPath: isDark ? clipPath.reverse() : clipPath,
+        },
+        {
+          duration: 500,
+          easing: 'ease-in-out',
+          pseudoElement: isDark
+            ? '::view-transition-old(root)'
+            : '::view-transition-new(root)',
+        }
+      );
+    });
+  };
 
   return (
     <Disclosure
@@ -43,14 +105,16 @@ export default function Navbar() {
       {({ open }) => (
         <>
           <div className={clsx(
-            "glass transition-all duration-500 rounded-2xl px-4 sm:px-6 md:px-8 py-3.5 md:py-4 flex items-center justify-between shadow-[0_0_30px_rgba(0,0,0,0.5)]",
-            scrolled ? "py-2.5 md:py-3 bg-black/60 border-white/10" : "bg-white/5 border-white/5"
+            "glass transition-all duration-500 rounded-2xl px-4 sm:px-6 md:px-8 py-3.5 md:py-4 flex items-center justify-between shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(0,0,0,0.5)]",
+            scrolled 
+              ? "py-2.5 md:py-3 bg-white/80 dark:bg-black/60 border-black/5 dark:border-white/10 backdrop-blur-md" 
+              : "bg-white/30 dark:bg-white/5 border-black/5 dark:border-white/5 backdrop-blur-md"
           )}>
             
             {/* Logo */}
             <a
               href="/#home"
-              className="font-black text-2xl tracking-tighter text-white group flex items-center gap-1"
+              className="font-black text-2xl tracking-tighter text-slate-800 dark:text-white group flex items-center gap-1"
             >
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform">
                 <span className="text-white text-base">M</span>
@@ -68,7 +132,7 @@ export default function Navbar() {
                     href={item.href}
                     className={clsx(
                       'text-xs font-black uppercase tracking-widest transition-all relative group',
-                      isActive ? 'text-blue-400' : 'text-gray-400 hover:text-white'
+                      isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white'
                     )}
                   >
                     {item.name}
@@ -87,8 +151,8 @@ export default function Navbar() {
                 className={clsx(
                   "flex items-center gap-2 px-3 py-2 rounded-xl border transition-all text-[10px] font-black uppercase tracking-widest",
                   lightweightMode 
-                    ? "bg-amber-500/10 border-amber-500/30 text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.2)]" 
-                    : "bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/20"
+                    ? "bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.2)]" 
+                    : "bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:border-black/20 dark:hover:border-white/20"
                 )}
               >
                 {lightweightMode ? (
@@ -104,11 +168,30 @@ export default function Navbar() {
                 )}
               </button>
 
+              {/* Theme Switcher Button */}
+              <button
+                onClick={toggleTheme}
+                title={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                className="flex items-center justify-center p-2 rounded-xl border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all"
+              >
+                <motion.div
+                  initial={false}
+                  animate={{ rotate: theme === 'dark' ? 0 : 180 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                >
+                  {theme === 'dark' ? (
+                    <Moon className="w-4 h-4 fill-current text-purple-400" />
+                  ) : (
+                    <Sun className="w-4 h-4 text-amber-500 fill-current" />
+                  )}
+                </motion.div>
+              </button>
+
               <motion.a 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 href="/Mina%20Romany%20Abdel-shaheed.CV.pdf" 
-                className="bg-white text-black text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-xl transition-all shadow-xl hover:shadow-white/10"
+                className="bg-slate-900 text-white dark:bg-white dark:text-black text-[10px] font-black uppercase tracking-widest px-5 py-2.5 rounded-xl transition-all shadow-xl hover:shadow-black/10 dark:hover:shadow-white/10"
               >
                 Resume PDF
               </motion.a>
@@ -116,20 +199,41 @@ export default function Navbar() {
 
             {/* Mobile Actions Container */}
             <div className="flex md:hidden items-center gap-2">
+              {/* Performance Mode */}
               <button
                 onClick={toggleLightweightMode}
                 className={clsx(
                   "p-2 rounded-xl border transition-all",
                   lightweightMode 
-                    ? "bg-amber-500/10 border-amber-500/30 text-amber-400" 
-                    : "bg-white/5 border-white/5 text-gray-400"
+                    ? "bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400" 
+                    : "bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/5 text-slate-600 dark:text-gray-400"
                 )}
                 title="Toggle Performance Mode"
               >
                 {lightweightMode ? <Zap className="w-4 h-4 fill-current" /> : <ZapOff className="w-4 h-4" />}
               </button>
 
-              <DisclosureButton className="inline-flex items-center justify-center rounded-xl p-2 text-gray-300 hover:text-white hover:bg-white/5 transition outline-none border border-white/5">
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                title={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                className="p-2 rounded-xl border border-black/5 dark:border-white/5 bg-black/5 dark:bg-white/5 text-slate-600 dark:text-gray-400"
+              >
+                <motion.div
+                  initial={false}
+                  animate={{ rotate: theme === 'dark' ? 0 : 180 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="flex items-center justify-center"
+                >
+                  {theme === 'dark' ? (
+                    <Moon className="w-4 h-4 fill-current text-purple-400" />
+                  ) : (
+                    <Sun className="w-4 h-4 text-amber-500 fill-current" />
+                  )}
+                </motion.div>
+              </button>
+
+              <DisclosureButton className="inline-flex items-center justify-center rounded-xl p-2 text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition outline-none border border-black/5 dark:border-white/5">
                 <span className="sr-only">Open menu</span>
                 {open ? (
                   <XMarkIcon className="h-5 w-5" />
@@ -141,21 +245,21 @@ export default function Navbar() {
           </div>
 
           <DisclosurePanel className="md:hidden mt-4 origin-top transition duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0">
-            <div className="rounded-2xl glass p-8 space-y-6 shadow-2xl">
+            <div className="rounded-2xl glass p-8 space-y-6 shadow-2xl bg-white/90 dark:bg-black/90 backdrop-blur-xl border border-black/5 dark:border-white/5">
               {navigation.map((item) => (
                 <DisclosureButton
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className="block text-gray-400 hover:text-white font-black text-sm uppercase tracking-widest transition-colors"
+                  className="block text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white font-black text-sm uppercase tracking-widest transition-colors"
                 >
                   {item.name}
                 </DisclosureButton>
               ))}
-              <div className="pt-4 border-t border-white/5 space-y-3">
+              <div className="pt-4 border-t border-black/5 dark:border-white/5 space-y-3">
                  <a 
                    href="/Mina%20Romany%20Abdel-shaheed.CV.pdf" 
-                   className="block text-center bg-white text-black text-[10px] font-black uppercase tracking-widest py-4 rounded-xl"
+                   className="block text-center bg-slate-900 text-white dark:bg-white dark:text-black text-[10px] font-black uppercase tracking-widest py-4 rounded-xl"
                  >
                    Download Resume PDF
                  </a>

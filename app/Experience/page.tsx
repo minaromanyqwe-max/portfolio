@@ -35,7 +35,7 @@ export default function Experience() {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/5 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-xl"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/5 border border-blue-500/20 text-blue-500 dark:text-blue-400 text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-xl"
         >
           <MapPin className="w-4 h-4" /> My Roadmap
         </motion.div>
@@ -44,7 +44,7 @@ export default function Experience() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight text-white"
+          className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight text-slate-900 dark:text-white"
         >
           Education & <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Experience</span>
         </motion.h2>
@@ -76,7 +76,7 @@ export default function Experience() {
             >
               {/* Central Circle Dot */}
               <div className="absolute left-0 md:left-1/2 -translate-x-1/2 flex items-center justify-center z-20">
-                 <div className="w-12 h-12 rounded-2xl glass border border-white/10 flex items-center justify-center rotate-45 group-hover:rotate-90 transition-transform duration-500">
+                 <div className="w-12 h-12 rounded-2xl glass bg-white dark:bg-transparent border border-black/10 dark:border-white/10 flex items-center justify-center rotate-45 group-hover:rotate-90 transition-transform duration-500">
                     <div className={`w-3 h-3 rounded-full bg-gradient-to-r ${exp.color} -rotate-45 shadow-[0_0_15px_rgba(59,130,246,0.5)]`} />
                  </div>
               </div>
@@ -85,7 +85,7 @@ export default function Experience() {
               <div className="w-full md:w-[46%] ml-8 md:ml-0">
                 <motion.div 
                   whileHover={{ y: -10, scale: 1.02 }}
-                  className="relative rounded-[2.5rem] bg-zinc-900/40 backdrop-blur-xl border border-white/5 p-8 md:p-10 hover:border-blue-500/30 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+                  className="relative rounded-[2.5rem] bg-white/60 dark:bg-zinc-900/40 backdrop-blur-xl border border-black/5 dark:border-white/5 p-8 md:p-10 hover:border-blue-500/30 transition-all duration-500 shadow-lg dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
                 >
                   {/* Decorative Glow */}
                   <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${exp.color} opacity-0 group-hover:opacity-10 transition-opacity duration-700 blur-[80px] rounded-full`} />
@@ -102,10 +102,10 @@ export default function Experience() {
                         "flex flex-col items-start",
                         index % 2 === 0 ? "md:items-end" : "md:items-start"
                     )}>
-                        <h4 className="text-2xl md:text-3xl font-bold text-white tracking-tight leading-none mb-2 group-hover:text-blue-400 transition-colors">
+                        <h4 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white tracking-tight leading-none mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                             {exp.title}
                         </h4>
-                        <div className="flex items-center gap-2 text-blue-400 font-semibold text-sm">
+                        <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold text-sm">
                             <MapPin className="w-4 h-4" />
                             {exp.place}
                         </div>
@@ -113,7 +113,7 @@ export default function Experience() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-gray-400 leading-relaxed text-base md:text-lg font-light mb-8">
+                  <p className="text-slate-600 dark:text-gray-400 leading-relaxed text-base md:text-lg font-light mb-8">
                     {exp.description}
                   </p>
 
@@ -122,14 +122,14 @@ export default function Experience() {
                     "flex items-center",
                     index % 2 === 0 ? "md:justify-end justify-start" : "justify-start"
                   )}>
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-300 text-sm font-medium">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-gray-300 text-sm font-medium">
                         <Calendar className="w-4 h-4 text-blue-500" />
                         {exp.date}
                     </div>
                   </div>
 
                   {/* Tiny Icon Link Decoration */}
-                  <div className="absolute top-6 right-6 text-white/10 group-hover:text-blue-500/40 transition-colors">
+                  <div className="absolute top-6 right-6 text-slate-900/10 dark:text-white/10 group-hover:text-blue-600/40 dark:group-hover:text-blue-500/40 transition-colors">
                     <ArrowUpRight className="w-8 h-8" />
                   </div>
                 </motion.div>

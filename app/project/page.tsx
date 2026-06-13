@@ -79,7 +79,7 @@ export default function Project() {
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/5 border border-white/10 text-blue-400 text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-md"
+          className="flex items-center gap-2 px-5 py-2 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-blue-500 dark:text-blue-400 text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-md"
         >
           <Code2 className="w-4 h-4" /> My Portfolio
         </motion.div>
@@ -102,7 +102,7 @@ export default function Project() {
         <motion.p 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="text-gray-400 max-w-2xl text-base sm:text-lg mb-8 leading-relaxed px-4"
+          className="text-slate-600 dark:text-gray-400 max-w-2xl text-base sm:text-lg mb-8 leading-relaxed px-4"
         >
           A selection of my recent works where design meets functional excellence.
         </motion.p>
@@ -118,7 +118,7 @@ export default function Project() {
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true }}
             whileHover={{ y: -8 }}
-            className="group relative flex flex-col h-full rounded-[2rem] bg-zinc-900/50 border border-white/10 overflow-hidden backdrop-blur-sm hover:border-blue-500/50 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-500"
+            className="group relative flex flex-col h-full rounded-[2rem] bg-white/60 dark:bg-zinc-900/50 border border-black/10 dark:border-white/10 overflow-hidden backdrop-blur-sm hover:border-blue-500/50 hover:shadow-[0_0_30px_-10px_rgba(59,130,246,0.3)] transition-all duration-500 shadow-lg dark:shadow-none"
           >
             {/* Image Section */}
             <div className="relative aspect-video overflow-hidden shrink-0">
@@ -134,7 +134,7 @@ export default function Project() {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute top-4 right-4 p-3 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white opacity-0 md:group-hover:opacity-100 transition-all duration-300 md:translate-y-2 md:group-hover:translate-y-0 hover:bg-blue-600 sm:opacity-100 sm:translate-y-0"
+                className="absolute top-4 right-4 p-3 rounded-full bg-black/60 backdrop-blur-md border border-black/10 dark:border-white/10 text-white opacity-0 md:group-hover:opacity-100 transition-all duration-300 md:translate-y-2 md:group-hover:translate-y-0 hover:bg-blue-600 sm:opacity-100 sm:translate-y-0"
               >
                 <ExternalLink className="w-5 h-5" />
               </a>
@@ -142,11 +142,11 @@ export default function Project() {
 
             {/* Content Section */}
             <div className="p-6 sm:p-8 flex flex-col flex-1">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors leading-snug">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
                 {project.name}
               </h3>
               
-              <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-8 flex-1">
+              <p className="text-slate-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed mb-8 flex-1">
                 {project.description}
               </p>
 
@@ -155,7 +155,7 @@ export default function Project() {
                 {project.tech.map((t, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1.5 text-[11px] sm:text-xs font-bold tracking-wider uppercase rounded-lg bg-white/5 text-gray-300 border border-white/5 group-hover:border-blue-500/30 group-hover:text-blue-300 transition-all"
+                    className="px-3 py-1.5 text-[11px] sm:text-xs font-bold tracking-wider uppercase rounded-lg bg-black/5 dark:bg-white/5 text-slate-600 dark:text-gray-300 border border-black/5 dark:border-white/5 group-hover:border-blue-500/30 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-all"
                   >
                     {t}
                   </span>
@@ -167,7 +167,7 @@ export default function Project() {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white font-semibold group-hover:bg-blue-600 transition-all duration-300 shrink-0"
+                className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-slate-800 dark:text-white font-semibold group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shrink-0"
               >
                 <span>View Live Demo</span>
                 <ExternalLink className="w-4 h-4" />

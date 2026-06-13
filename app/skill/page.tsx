@@ -37,14 +37,14 @@ const skillCategories = [
 export default function Skills() {
   return (
     <section id="skills" className="mb-40 pt-20 px-4 md:px-0">
-      <div className="flex flex-col items-center mb-16 text-center">
+       <div className="flex flex-col items-center mb-16 text-center">
         <motion.div
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
-           className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium mb-4"
+           className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 dark:text-blue-400 text-sm font-medium mb-4"
         >
-          <Cpu className="w-4 h-4" /> My Ability
+           <Cpu className="w-4 h-4" /> My Ability
         </motion.div>
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -77,7 +77,7 @@ export default function Skills() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="text-gray-500 text-sm font-bold uppercase tracking-[0.3em] mb-10 ml-2"
+              className="text-slate-500 dark:text-gray-500 text-sm font-bold uppercase tracking-[0.3em] mb-10 ml-2"
             >
               {category.title}
             </motion.h3>
@@ -91,7 +91,7 @@ export default function Skills() {
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   viewport={{ once: true }}
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative rounded-2xl glass p-4 sm:p-6 md:p-8 flex flex-col items-center gap-3 sm:gap-5 transition-all duration-300 border border-white/5 hover:border-blue-500/30 overflow-hidden"
+                  className="group relative rounded-2xl glass bg-white/60 dark:bg-transparent p-4 sm:p-6 md:p-8 flex flex-col items-center gap-3 sm:gap-5 transition-all duration-300 border border-black/5 dark:border-white/5 hover:border-blue-500/30 overflow-hidden shadow-md dark:shadow-none"
                 >
                   {/* Subtle Background Glow */}
                   <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-b ${skill.glow} to-transparent blur-2xl rounded-full translate-y-10`} />
@@ -108,7 +108,7 @@ export default function Skills() {
 
                   {/* Name */}
                   <div className="mt-2 text-center">
-                    <span className="relative z-10 text-sm font-bold text-gray-500 group-hover:text-white tracking-widest transition-colors uppercase">
+                    <span className="relative z-10 text-sm font-bold text-slate-500 group-hover:text-slate-950 dark:group-hover:text-white tracking-widest transition-colors uppercase">
                       {skill.name}
                     </span>
                     <div className="h-0.5 w-0 group-hover:w-full bg-blue-500/50 transition-all duration-300 mx-auto mt-1"></div>
